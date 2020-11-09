@@ -6,8 +6,3 @@ class Circuit{
 };
 
 
-
-int main(){
-
-    return 0;
-}
