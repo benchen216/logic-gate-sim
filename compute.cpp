@@ -24,6 +24,20 @@ bitset<32> myor(vector<bitset<32>> z){
 bitset<32> myxor(bitset<32> a,bitset<32> b){
     return a.operator^=(b);
 }
+bitset<32> mynand(vector<bitset<32>> z){
+    bitset<32>ans_and(4294967295);
+    for(bitset<32>a :z){
+        ans_and=ans_and.operator&=(a).operator~();
+    }
+    return ans_and;
+}
+bitset<32> mynor(vector<bitset<32>> z){
+    bitset<32>ans_or(0);
+    for(bitset<32>a :z){
+        ans_or=ans_or.operator|=(a).operator~();
+    }
+    return ans_or;
+}
 
 int main(){
     bitset<32> *a;
@@ -33,6 +47,7 @@ int main(){
     b.at(0).operator|=(4);
     b.at(1).operator|=(2);
 
-    cout<< myor(b);//.operator|=(bitset<32>("1010"))
+    cout<< b.at(1);
+    cout<< b.at(1).operator~();//.operator|=(bitset<32>("1010"))
     return 0;
 }
