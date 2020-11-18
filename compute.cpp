@@ -38,6 +38,9 @@ bitset<32> mynor(vector<bitset<32>> z){
     }
     return ans_or;
 }
+bitset<32> (*calcArray[])(bitset<32> ,bitset<32>)={
+
+};
 
 int main(){
     bitset<32> *a;
