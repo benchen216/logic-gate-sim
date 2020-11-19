@@ -21,8 +21,8 @@ bitset<32> myor(vector<bitset<32>> z){
     }
     return ans_or;
 }
-bitset<32> myxor(bitset<32> a,bitset<32> b){
-    return a.operator^=(b);
+bitset<32> myxor(vector<bitset<32>> z){
+    return z.at(0).operator^=(z.at(1));
 }
 bitset<32> mynand(vector<bitset<32>> z){
     bitset<32>ans_and(4294967295);
@@ -38,8 +38,21 @@ bitset<32> mynor(vector<bitset<32>> z){
     }
     return ans_or;
 }
-bitset<32> (*calcArray[])(bitset<32> ,bitset<32>)={
-
+bitset<32> mynot(vector<bitset<32>> z){
+    return z.at(0).operator~();
+}
+bitset<32> mybuf(vector<bitset<32>> z){
+    return z.at(0);
+}
+bitset<32> (*calcArray[])(vector<bitset<32>>)={
+myand,
+myor,
+mynand,
+myxor,
+myor,
+mynor,
+mynot,
+mybuf
 };
 
 int main(){
