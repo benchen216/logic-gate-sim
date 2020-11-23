@@ -6,7 +6,6 @@ try:
         bench = [i.strip("\n") for i in file.readlines()]
 except:
     pass
-print(bench)
 c_input = []
 c_output = []
 c_logic = []
