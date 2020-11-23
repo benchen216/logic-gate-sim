@@ -54,15 +54,4 @@ mynot,
 mybuf
 };
 
-int main(){
-    bitset<32> *a;
-    vector<bitset<32>>b;
-    b.push_back(bitset<32>(0));
-    b.push_back(bitset<32>(0));
-    b.at(0).operator|=(4);
-    b.at(1).operator|=(2);
 
-    cout<< b.at(1);
-    cout<< b.at(1).operator~();//.operator|=(bitset<32>("1010"))
-    return 0;
-}
