@@ -5,6 +5,9 @@
 #include <vector>
 #include "compute.hpp"
 using namespace std;
+#include <pybind11/pybind11.h>
+//#include <pybind11/stl.h>
+namespace py = pybind11;
 
 //template<typename T>
 class node{
@@ -72,12 +75,8 @@ int main(){
 
 
 
-/*
-#include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
-namespace py = pybind11;
 
+/*
 PYBIND11_MODULE(build_gate, m){
 
-}
-*/
+}*/
