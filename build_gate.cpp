@@ -49,6 +49,9 @@ int main(){
     //cout<<n3.run()<<endl;
     node n4=node(mybuf,f);
     cout<<n4.run()<<endl;
+    n1.set(bitset<32>(2));
+    n2.set(bitset<32>(2));
+    cout<<n4.run()<<endl;
     /*
     bitset<32> *a;
     vector<bitset<32>>b;

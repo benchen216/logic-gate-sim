@@ -6,6 +6,8 @@
 #include <vector>
 
 using namespace std;
+
+//template<typename T>
 bitset<32> myand(vector<bitset<32>> z){
     bitset<32>ans_and(4294967295);
     for(bitset<32>a :z){
