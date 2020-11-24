@@ -15,9 +15,9 @@ public:
     node(){
         from.push_back(nullptr);
     }
-    node(bitset<32> (*cal)(vector<bitset<32>>),vector<node *> inputnode){
+    node(bitset<32> (*cal)(vector<bitset<32>>),vector<node *>* inputnode){
         gate = cal;
-        from = inputnode;
+        from = *inputnode;
     }
     bitset<32>run(){
         vector<bitset<32>>from_value;
@@ -34,6 +34,11 @@ public:
         value = input;
     }
 };
+void buid_logic(){
+    vector<node *> input;
+    vector<node *> output;
+    vector<node *> temp;
+}
 
 int main(){
     node n1=node();
@@ -41,13 +46,13 @@ int main(){
     vector<node *> z;
     z.push_back(&n1);
     z.push_back(&n2);
-    node n3=node(myand,z);
+    node n3=node(myand,&z);
     n1.set(bitset<32>(1));
-    n2.set(bitset<32>(1));
+    n2.set(bitset<32>(2));
     vector<node*>f;
     f.push_back(&n3);
     //cout<<n3.run()<<endl;
-    node n4=node(mybuf,f);
+    node n4=node(mybuf,&f);
     cout<<n4.run()<<endl;
     n1.set(bitset<32>(2));
     n2.set(bitset<32>(2));
