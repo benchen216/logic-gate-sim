@@ -3,10 +3,12 @@
 //
 #include <iostream>
 #include <vector>
+#include <bitset>
 #include "compute.hpp"
 using namespace std;
 #include <pybind11/pybind11.h>
-//#include <pybind11/stl.h>
+#include <pybind11/stl.h>
+#include <pybind11/operators.h>
 namespace py = pybind11;
 
 //template<typename T>
@@ -37,12 +39,13 @@ public:
         value = input;
     }
 };
-void buid_logic(){
+int build_logic(){
     vector<node *> input;
     vector<node *> output;
     vector<node *> temp;
+    return 1;
 }
-
+/*
 int main(){
     node n1=node();
     node n2=node();
@@ -54,29 +57,20 @@ int main(){
     n2.set(bitset<32>(2));
     vector<node*>f;
     f.push_back(&n3);
-    //cout<<n3.run()<<endl;
     node n4=node(mybuf,&f);
     cout<<n4.run()<<endl;
     n1.set(bitset<32>(2));
     n2.set(bitset<32>(2));
     cout<<n4.run()<<endl;
-    /*
-    bitset<32> *a;
-    vector<bitset<32>>b;
-    b.push_back(bitset<32>(0));
-    b.push_back(bitset<32>(0));
-    b.at(0).operator|=(4);
-    b.at(1).operator|=(2);
-
-    cout<< b.at(1);
-    cout<< b.at(1).operator~();//.operator|=(bitset<32>("1010"))*/
     return 0;
-}
-
+}*/
 
 
 
 /*
-PYBIND11_MODULE(build_gate, m){
 
-}*/
+PYBIND11_MODULE(_build_gate, m){
+    m.doc() = "pybind11 matrix multiplication test";
+    m.def("build_logic", & build_logic, "naive method");
+}
+*/
