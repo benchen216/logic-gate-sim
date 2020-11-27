@@ -2,6 +2,7 @@
 // Created by ben on 11/19/20.
 //
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <bitset>
 
@@ -12,7 +13,6 @@ using namespace std;
 #include <pybind11/stl.h>
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
-#include <pybind11/chrono.h>
 #include <pybind11/operators.h>
 #include <pybind11/stl_bind.h>
 namespace py = pybind11;
@@ -20,22 +20,16 @@ namespace py = pybind11;
 //template<typename T>
 class node{
 public:
-    //bitset<32> (*gate)(vector<bitset<32>>);
-    function<bitset<32>(vector<bitset<32>>)>gate2;
+    function<bitset<32>(vector<bitset<32>>)>gate;
     vector<node *>from;
     bitset<32> value;
     node(){
         from.push_back(nullptr);
     }
-    /*
-    node(bitset<32> (*cal)(vector<bitset<32>>),vector<node *> inputnode){
-        gate = cal;
-        from = inputnode;
-    }*/
 
     node(function<bitset<32>(vector<bitset<32>>)>cal,vector<node *> inputnode){
-        gate2 = cal;
-        from = inputnode;
+        gate = std::move(cal);
+        from = std::move(inputnode);
 }
     bitset<32> run(){
         vector<bitset<32>>from_value;
@@ -46,7 +40,7 @@ public:
                 from_value.push_back(i->run());
             }
         }
-        return gate2(from_value);
+        return gate(from_value);
     }
     void no_run(){
         set(run());
@@ -54,39 +48,22 @@ public:
     void set(bitset<32> input){
         value = input;
     }
-    void str_set(string input){
+    void str_set(const string& input){
         value=bitset<32>(input);
     }
-    void output(){
+    void output() const{
         cout<<value<<endl;
     }
+    string to_string(){
+        return value.to_string();
+    }
 };
-class test{
-public:
-    int a=0;
-    bitset<32> d=bitset<32>(2);
-    test(int b){
-        a=b;
-    }
-    test(bitset<32> k ){
-        d=k;
-    }
-    bitset<32> run(){
-        return d;
-    }
-    test * run2(){
-        return this;
-    }
-    vector<test *>g;
-    function<int(vector<int>)> gate;
-
-};
-
 int build_logic(vector<node *> input){
 //,vector<node *> output,vector<node *> logic
     cout<<input.at(0)->value;
     return 1;
-}/*
+}
+/*
 int main(){
     node n1=node();
     node n2=node();
@@ -107,15 +84,8 @@ int main(){
 }
 */
 PYBIND11_MODULE(_build_gate, m){
-    m.doc() = "pybind11 matrix multiplication test";
+    m.doc() = "pybind11 logic gate";
     m.def("build_logic", & build_logic, "naive method");
-
-    py::class_<test>(m,"test")
-            .def(py::init<int>())
-            .def(py::init<bitset<32>>())
-            .def("run",&test::run)
-            .def("run2",&test::run2)
-            .def_readwrite("d",&test::d);
 
     py::class_<node>(m, "node")
         .def(py::init<>())
@@ -125,7 +95,8 @@ PYBIND11_MODULE(_build_gate, m){
         .def("str_set",&node::str_set)
         .def("run",&node::run)
         .def("no_run",&node::no_run)
-        .def("output",&node::output);
+        .def("output",&node::output)
+        .def("__str__",&node::to_string);
     m.def("myand",&myand);
     m.def("mynand",&mynand);
     m.def("myor",&myor);
