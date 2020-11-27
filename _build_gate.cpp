@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <bitset>
+
 #include "compute.hpp"
 using namespace std;
 
@@ -19,17 +20,19 @@ namespace py = pybind11;
 //template<typename T>
 class node{
 public:
-    bitset<32> (*gate)(vector<bitset<32>>);
+    //bitset<32> (*gate)(vector<bitset<32>>);
     function<bitset<32>(vector<bitset<32>>)>gate2;
     vector<node *>from;
     bitset<32> value;
     node(){
         from.push_back(nullptr);
     }
+    /*
     node(bitset<32> (*cal)(vector<bitset<32>>),vector<node *> inputnode){
         gate = cal;
         from = inputnode;
-    }
+    }*/
+
     node(function<bitset<32>(vector<bitset<32>>)>cal,vector<node *> inputnode){
         gate2 = cal;
         from = inputnode;
@@ -38,15 +41,24 @@ public:
         vector<bitset<32>>from_value;
         for(auto i: from){
             if(i==nullptr){
-                from_value.push_back(this->value);
+                return value;
             } else {
                 from_value.push_back(i->run());
             }
         }
-        return gate(from_value);
+        return gate2(from_value);
+    }
+    void no_run(){
+        set(run());
     }
     void set(bitset<32> input){
         value = input;
+    }
+    void str_set(string input){
+        value=bitset<32>(input);
+    }
+    void output(){
+        cout<<value<<endl;
     }
 };
 class test{
@@ -69,36 +81,31 @@ public:
     function<int(vector<int>)> gate;
 
 };
-int build_logic(){
-    vector<node *> input;
-    vector<node *> output;
-    vector<node *> temp;
+
+int build_logic(vector<node *> input){
+//,vector<node *> output,vector<node *> logic
+    cout<<input.at(0)->value;
     return 1;
-}
-/*
+}/*
 int main(){
     node n1=node();
     node n2=node();
     vector<node *> z;
     z.push_back(&n1);
     z.push_back(&n2);
-    node n3=node(myand,z);
+    node n3=node(myand,&z);
     n1.set(bitset<32>(1));
     n2.set(bitset<32>(2));
     vector<node*>f;
     f.push_back(&n3);
-    node n4=node(mybuf,f);
+    node n4=node(mybuf,&f);
     cout<<n4.run()<<endl;
     n1.set(bitset<32>(2));
     n2.set(bitset<32>(2));
     cout<<n4.run()<<endl;
-    function<unsigned int(vector<unsigned int>)> gate=&mybuf2;
-    vector<unsigned int>d;
-    d.push_back(1);
-    cout<<gate(d);
     return 0;
-}*/
-
+}
+*/
 PYBIND11_MODULE(_build_gate, m){
     m.doc() = "pybind11 matrix multiplication test";
     m.def("build_logic", & build_logic, "naive method");
@@ -109,14 +116,16 @@ PYBIND11_MODULE(_build_gate, m){
             .def("run",&test::run)
             .def("run2",&test::run2)
             .def_readwrite("d",&test::d);
-    //.def("a",&test::a);
 
     py::class_<node>(m, "node")
         .def(py::init<>())
-        .def(py::init<bitset<32>(*)(vector<bitset<32>>),vector<node *>>())
+        //.def(py::init<bitset<32>(*)(vector<bitset<32>>),vector<node *>>())
         .def(py::init<function<bitset<32>(vector<bitset<32>>)>,vector<node *>>())
         .def("set",&node::set)
-        .def("run",&node::run);
+        .def("str_set",&node::str_set)
+        .def("run",&node::run)
+        .def("no_run",&node::no_run)
+        .def("output",&node::output);
     m.def("myand",&myand);
     m.def("mynand",&mynand);
     m.def("myor",&myor);
@@ -124,8 +133,6 @@ PYBIND11_MODULE(_build_gate, m){
     m.def("mynor",&mynor);
     m.def("mynot",&mynot);
     m.def("mybuf",&mybuf);
-    //  .def_property()
-    //.def_property("value", &node::value, nullptr);
 }
 
 

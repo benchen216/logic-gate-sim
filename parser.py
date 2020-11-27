@@ -53,13 +53,29 @@ def build(t):
     ans = _build_gate.node(gate,[build(i) for i in c_logic2[t][1]])
     x_logic[t]=ans
     return ans
-#print(_build_gate.myand)
-print(_build_gate.node(_build_gate.myand,[_build_gate.node()]))
+
 for i in c_input:
     x_input[i] = _build_gate.node()
-print(x_input)
-
+#print(x_input)
 for i in c_output:
     x_output[i]=build(i)
-print(len(x_logic))
-print(x_output)
+#print(len(x_logic))
+#print(x_output)
+for i in x_input.values():
+    i.str_set("1")
+    #i.output()
+
+for i in x_logic.values():
+    print(i)
+for i in x_output.values():
+    #pass
+    i.no_run()
+print(123)
+for i in c_output:
+    print(i)
+    x_output[i].output()
+'''
+z=_build_gate.node()
+z.str_set("1111")
+_build_gate.build_logic([z])
+'''
