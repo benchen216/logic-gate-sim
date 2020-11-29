@@ -1,8 +1,9 @@
-#logic gate circuit simulation
+# logic gate circuit simulation
 
 tool c++ and python
 
-###c++
+
+### c++
 
 bitset, vector
 
@@ -11,11 +12,14 @@ bitset, vector
 
 2020/11/27 using pybind11/functional.h
 
-###python 
+2020/11/28 pytest logic
+
+### python 
 pybind, RE, flask
 
 
 
 # todo
 using simd to improve performance
+
 try to do REST API
