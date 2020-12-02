@@ -1,6 +1,5 @@
 import _build_gate
 
-
 def read_bench(filename="c17.bench.txt"):
     try:
         with open(filename) as file:
@@ -82,16 +81,19 @@ if __name__ == "__main__":
     bench = read_bench()
     c_input, c_logic, c_output = parser_bench(bench)
     x_input, x_logic, x_output = build_bench(c_input, c_logic, c_output)
+    #z = [i for i in x_input]
+    #print(x_input,x_logic,x_output)
+    #_build_gate.build_logic()
     for i in x_input.values():
         set_value(i,"1")
     # i.output()
     for i in x_output.values():
-        # pass
         i.no_run()
     for i in c_output:
         print(i)
         #x_output[i].output()
         print(x_output[i].__str__())
+    print(x_output)
 
 
 '''

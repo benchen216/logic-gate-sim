@@ -58,10 +58,15 @@ public:
         return value.to_string();
     }
 };
-int build_logic(vector<node *> input){
+void build_logic(vector<node *> input,vector<string> c_input,vector<node *> output,vector<string> c_output){
 //,vector<node *> output,vector<node *> logic
-    cout<<input.at(0)->value;
-    return 1;
+    for(int i = 0; i < c_input.size();i++){
+        c_input[i];
+//n->str_set("111111");
+    }
+    for(auto n : output){
+        cout<<n->run();
+    }
 }
 /*
 int main(){
