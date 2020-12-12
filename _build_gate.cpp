@@ -75,44 +75,51 @@ void test(map<string,node *> input,map<string,node *>output){
 }
 void build_logic(map<string,node *> input,map<string,node *>output){
     ifstream inputfile("inputfile.txt");
-    ofstream outputfile("outputfile.txt",ios::app);
+    ofstream outputfile("outputfile.txt");
     map<string,node *>::iterator iter;
     string str1[32];
     int i =0;
     string str3[input.size()];
     for(string line;getline(inputfile,line,'\n');i++){
-        str1[i]=line;
+        if(i%32==0&&i!=0)outputfile<<endl;
+        str1[i%32]=line;
         if(i%32==31){
             for(unsigned int j=0;j<input.size();j++){
                 for(int z=0;z<32;z++) {
-                    char tem=str1[z][j];
-                    str3[j]+=tem;
+                    char tem = str1[z][j];
+                    str3[j] += tem;
                 }
                 //outputfile<<str3[j]<<endl;
             }
+            int a = 0;
+            for(iter = input.begin();iter != input.end();iter++){
+                cout<<iter->first<<endl;
+                input[iter->first]->str_set(str3[a]);
+                a++;
+            }
+            string str4[output.size()];
+            int b =0;
+            for(iter = output.begin();iter!=output.end();iter++){
+                cout<<iter->first<<endl;
+                output[iter->first]->no_run();
+                str4[b]=output[iter->first]->to_string();
+                b++;
+            }
+            for(int w=0;w<32;w++){
+                for(unsigned int x=0;x<output.size();x++){
+                    outputfile<<str4[x][w];
+                }
+                if(w%32!=31)outputfile<<endl;
+            }
         }
+        cout<<i<<endl;
     }
-    int a = 0;
-    for(iter = input.begin();iter != input.end();iter++){
-        cout<<iter->first<<endl;
-        input[iter->first]->str_set(str3[a]);
-        a++;
+    if(i%32){
+
+        cout<<"xxx:"<<i;
     }
-    string str4[output.size()];
-    int b =0;
-    for(iter = output.begin();iter!=output.end();iter++){
-        cout<<iter->first<<endl;
-        output[iter->first]->no_run();
-        str4[b]=output[iter->first]->to_string();
-        b++;
-    }
-    //string str[32];
-    for(int i=0;i<32;i++){
-        for(unsigned int x=0;x<output.size();x++){
-            outputfile<<str4[x][i];
-        }
-        outputfile<<endl;
-    }
+    //if(i%32)
+
     outputfile.close();
 }
 /*
