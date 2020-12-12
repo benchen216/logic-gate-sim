@@ -81,11 +81,14 @@ if __name__ == "__main__":
     bench = read_bench()
     c_input, c_logic, c_output = parser_bench(bench)
     x_input, x_logic, x_output = build_bench(c_input, c_logic, c_output)
+
     #z = [i for i in x_input]
     #print(x_input,x_logic,x_output)
-    #_build_gate.build_logic()
-    for i in x_input.values():
-        set_value(i,"1")
+    _build_gate.build_logic(x_input, x_output)
+    t1=["1111","11110","10111","11011","11101"]
+    for j,i in enumerate(x_input.values()):
+        set_value(i,t1[j])
+
     # i.output()
     for i in x_output.values():
         i.no_run()

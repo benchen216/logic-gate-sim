@@ -5,7 +5,10 @@
 #include <utility>
 #include <vector>
 #include <bitset>
+#include <map>
 
+#include <fstream>
+#include <sstream>
 #include "compute.hpp"
 using namespace std;
 
@@ -58,18 +61,23 @@ public:
         return value.to_string();
     }
 };
-void build_logic(vector<node *> input,vector<string> c_input,vector<node *> output,vector<string> c_output){
-//,vector<node *> output,vector<node *> logic
-    for(int i = 0; i < c_input.size();i++){
-        c_input[i];
-//n->str_set("111111");
+void build_logic(map<string,node *> input,map<string,node *>output){
+
+    map<string,node *>::iterator iter;
+    for(iter = input.begin();iter != input.end();iter++){
+        cout<<iter->first<<endl;
+        input[iter->first]->str_set("1111");
     }
-    for(auto n : output){
-        cout<<n->run();
+    for(iter = output.begin();iter!=output.end();iter++){
+        cout<<iter->first;
+        output[iter->first]->no_run();
+        cout<<output[iter->first]->to_string()<<endl;
     }
 }
 /*
 int main(){
+
+
     node n1=node();
     node n2=node();
     vector<node *> z;
@@ -88,6 +96,7 @@ int main(){
     return 0;
 }
 */
+
 PYBIND11_MODULE(_build_gate, m){
     m.doc() = "pybind11 logic gate";
     m.def("build_logic", & build_logic, "naive method");
