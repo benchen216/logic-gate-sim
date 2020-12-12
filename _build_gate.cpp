@@ -61,8 +61,7 @@ public:
         return value.to_string();
     }
 };
-void build_logic(map<string,node *> input,map<string,node *>output){
-
+void test(map<string,node *> input,map<string,node *>output){
     map<string,node *>::iterator iter;
     for(iter = input.begin();iter != input.end();iter++){
         cout<<iter->first<<endl;
@@ -73,6 +72,48 @@ void build_logic(map<string,node *> input,map<string,node *>output){
         output[iter->first]->no_run();
         cout<<output[iter->first]->to_string()<<endl;
     }
+}
+void build_logic(map<string,node *> input,map<string,node *>output){
+    ifstream inputfile("inputfile.txt");
+    ofstream outputfile("outputfile.txt",ios::app);
+    map<string,node *>::iterator iter;
+    string str1[32];
+    int i =0;
+    string str3[input.size()];
+    for(string line;getline(inputfile,line,'\n');i++){
+        str1[i]=line;
+        if(i%32==31){
+            for(unsigned int j=0;j<input.size();j++){
+                for(int z=0;z<32;z++) {
+                    char tem=str1[z][j];
+                    str3[j]+=tem;
+                }
+                //outputfile<<str3[j]<<endl;
+            }
+        }
+    }
+    int a = 0;
+    for(iter = input.begin();iter != input.end();iter++){
+        cout<<iter->first<<endl;
+        input[iter->first]->str_set(str3[a]);
+        a++;
+    }
+    string str4[output.size()];
+    int b =0;
+    for(iter = output.begin();iter!=output.end();iter++){
+        cout<<iter->first<<endl;
+        output[iter->first]->no_run();
+        str4[b]=output[iter->first]->to_string();
+        b++;
+    }
+    //string str[32];
+    for(int i=0;i<32;i++){
+        for(unsigned int x=0;x<output.size();x++){
+            outputfile<<str4[x][i];
+        }
+        outputfile<<endl;
+    }
+    outputfile.close();
 }
 /*
 int main(){
@@ -100,6 +141,7 @@ int main(){
 PYBIND11_MODULE(_build_gate, m){
     m.doc() = "pybind11 logic gate";
     m.def("build_logic", & build_logic, "naive method");
+    m.def("test", &test);
 
     py::class_<node>(m, "node")
         .def(py::init<>())

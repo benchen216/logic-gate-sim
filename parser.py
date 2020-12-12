@@ -84,7 +84,9 @@ if __name__ == "__main__":
 
     #z = [i for i in x_input]
     #print(x_input,x_logic,x_output)
+
     _build_gate.build_logic(x_input, x_output)
+    '''
     t1=["1111","11110","10111","11011","11101"]
     for j,i in enumerate(x_input.values()):
         set_value(i,t1[j])
@@ -97,7 +99,7 @@ if __name__ == "__main__":
         #x_output[i].output()
         print(x_output[i].__str__())
     print(x_output)
-
+'''
 
 '''
 z=_build_gate.node()
