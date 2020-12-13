@@ -78,18 +78,17 @@ void build_logic(map<string,node *> input,map<string,node *>output){
     ofstream outputfile("outputfile.txt");
     map<string,node *>::iterator iter;
     string str1[32];
-    int i =0;
+    int countlines =0;
     string str3[input.size()];
-    for(string line;getline(inputfile,line,'\n');i++){
-        if(i%32==0&&i!=0)outputfile<<endl;
-        str1[i%32]=line;
-        if(i%32==31){
+    for(string line; getline(inputfile,line,'\n'); countlines++){
+        if(countlines % 32 == 0 && countlines != 0)outputfile << endl;
+        str1[countlines % 32]=line;
+        if(countlines % 32 == 31){
             for(unsigned int j=0;j<input.size();j++){
                 for(int z=0;z<32;z++) {
                     char tem = str1[z][j];
                     str3[j] += tem;
                 }
-                //outputfile<<str3[j]<<endl;
             }
             int a = 0;
             for(iter = input.begin();iter != input.end();iter++){
@@ -112,14 +111,48 @@ void build_logic(map<string,node *> input,map<string,node *>output){
                 if(w%32!=31)outputfile<<endl;
             }
         }
-        cout<<i<<endl;
+        cout << countlines << endl;
     }
-    if(i%32){
-
-        cout<<"xxx:"<<i;
+    if(countlines % 32){
+        for(unsigned int j=0;j<input.size();j++){
+            for(int z=0;z<32;z++) {
+                if(z<=countlines%32){
+                    char tem = str1[z][j];
+                    str3[j] += tem;
+                }else{
+                    break;
+                }
+            }
+        }
+        int a = 0;
+        for(iter = input.begin();iter != input.end();iter++){
+            cout<<iter->first<<endl;
+            input[iter->first]->str_set(str3[a]);
+            a++;
+        }
+        string str4[output.size()];
+        int b =0;
+        for(iter = output.begin();iter!=output.end();iter++){
+            cout<<iter->first<<endl;
+            output[iter->first]->no_run();
+            str4[b]=output[iter->first]->to_string();
+            b++;
+        }
+        for(int w=0;w<32;w++){
+            if(w<countlines%32-1){
+                for(unsigned int x=0;x<output.size();x++){
+                    outputfile<<str4[x][w];
+                }
+                outputfile<<endl;
+            }else{
+                for(unsigned int x=0;x<output.size();x++){
+                    outputfile<<str4[x][w];
+                }
+                break;
+            }
+        }
+        cout << "xxx:" << countlines;
     }
-    //if(i%32)
-
     outputfile.close();
 }
 /*
