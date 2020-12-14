@@ -73,9 +73,10 @@ void test(map<string,node *> input,map<string,node *>output){
         cout<<output[iter->first]->to_string()<<endl;
     }
 }
-void build_logic(map<string,node *> input,map<string,node *>output){
-    ifstream inputfile("inputfile.txt");
-    ofstream outputfile("outputfile.txt");
+void build_logic(map<string,node *> input,map<string,node *>output,string inputname="inputfile.txt",
+                 string outputname="outputfile.txt"){
+    ifstream inputfile(inputname);
+    ofstream outputfile(outputname);
     map<string,node *>::iterator iter;
     string str1[32];
     int countlines =0;

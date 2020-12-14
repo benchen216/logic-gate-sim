@@ -1,4 +1,3 @@
-import pytest
 import unittest
 import _build_gate
 
