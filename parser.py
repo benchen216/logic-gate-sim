@@ -1,6 +1,6 @@
 import _build_gate
 
-def read_bench(filename="c17.bench.txt"):
+def read_bench(filename="testcase/c17.bench.txt"):
     try:
         with open(filename) as file:
             bench = [i.strip("\n") for i in file.readlines()]
@@ -71,7 +71,8 @@ def build_bench(c_input, c_logic, c_output):
 def set_value(node, value):
     node.str_set(value)
 
-
+def run_with_file_name(filename_bench,filename_input,filename_output):
+    pass
 # print(x_input)
 # print(len(x_logic))
 # print(x_output)
