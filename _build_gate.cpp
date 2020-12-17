@@ -202,7 +202,3 @@ PYBIND11_MODULE(_build_gate, m){
     m.def("mynot",&mynot);
     m.def("mybuf",&mybuf);
 }
-
-
-
-
