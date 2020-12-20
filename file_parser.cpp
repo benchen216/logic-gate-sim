@@ -4,7 +4,8 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-int main(){
+
+int main2(){
     ifstream inputfile("inputfile.txt");
     ofstream outputfile("outputfile.txt",ios::app);
     //outputfile<<"test"<<endl;
