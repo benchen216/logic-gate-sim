@@ -13,4 +13,4 @@ include_directories(
 #        /Users/ben/opt/conda/envs/nsd/include/python3.7m
 # pybind11_exp.cpp
 
-add_executable(logic-gate-sim sim.cpp compute.cpp _build_gate.cpp compute.hpp file_parser.cpp)
+add_executable(logic-gate-sim sim.cpp compute.cpp _build_gate.cpp compute.hpp file_parser.cpp simd_test.cpp)

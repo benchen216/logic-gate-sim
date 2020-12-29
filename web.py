@@ -2,7 +2,7 @@ from flask import Flask,  render_template, request, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = './tmp'
-ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', '.csv'])
+ALLOWED_EXTENSIONS = set(['pdf', 'png', 'jpg', 'jpeg', 'gif', 'txt', 'csv'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB
@@ -15,7 +15,7 @@ def allowed_file(filename):
 
 @app.route('/calpage', methods=['GET'])
 def cal_ans():
-    pass
+    return "xx"
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -44,7 +44,7 @@ def upload_input():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],
-                                   filename))
+                                   "myinput.txt"))
             return "uploaded"
     return '''
     <!doctype html>
@@ -64,7 +64,7 @@ def upload_bench():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],
-                                   filename))
+                                   "mybench.txt"))
             return "uploaded"
     return '''
     <!doctype html>
