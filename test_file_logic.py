@@ -23,11 +23,3 @@ class LogicTest(unittest.TestCase):
             with open("testcase/test_c17_ans32.txt", "r") as ansfile:
                 self.assertEqual(file.readlines(),ansfile.readlines())
 
-    def test_file_with_32_input2(self):
-        bench = parser.read_bench(filename="testcase/c432.bench.txt")
-        c_input, c_logic, c_output = parser.parser_bench(bench)
-        x_input, x_logic, x_output = parser.build_bench(c_input, c_logic, c_output)
-        _build_gate.build_logic2(x_input, x_output, str("testcase/c432_1m_ip.txt"), str("test_c432_op32.txt"))
-        #with open("test_c432_op32.txt","r") as file:
-            #with open("c432_1m_ans.txt", "r") as ansfile:
-                #self.assertEqual(file.readlines(),ansfile.readlines())

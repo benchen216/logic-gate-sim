@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys, getopt
 import parser
 import _build_gate
