@@ -18,7 +18,7 @@ class LogicTest(unittest.TestCase):
         ans[-1]=ans[-1].strip("\n")
         with open("test_c17_ip32.txt","w") as file:
             file.writelines(ans)
-        _build_gate.build_logic(x_input, x_output, str("test_c17_ip32.txt"), str("test_c17_op32.txt"))
+        _build_gate.build_logic(x_input, x_output, x_logic, str("test_c17_ip32.txt"), str("test_c17_op32.txt"))
         with open("test_c17_op32.txt","r") as file:
             with open("testcase/test_c17_ans32.txt", "r") as ansfile:
                 self.assertEqual(file.readlines(),ansfile.readlines())
