@@ -25,9 +25,13 @@ def cal_ans():
     <title>Wellcome to logic-gate-sim </title>
     <h1>Wellcome to logic-gate-sim</h1>
     <a href="/upload_bench">upload bench file</a>
-    '''+str(mybench)+'''<br>
+    '''+str(mybench)+'''
+    <a href="/download_bench_example">download example bench file</a>
+    '''+'''<br>
     <a href="/upload_input">upload input file</a>
-    '''+str(myinput)+'''<br>
+    '''+str(myinput)+'''
+    <a href="/download_input_example">download example input file</a>
+    '''+'''<br>
     <a href="/download">download outfile file</a>
     '''+'''<br>
     <a href="/del">clean input status file</a>
@@ -60,6 +64,17 @@ def downloadFile():
         print("run time:", time.time()-S)
     path = "./tmp/output.txt"
     return send_file(path, as_attachment=True)
+
+@app.route('/download_input_example')
+def download_input():
+    path = "./tmp/example.c17.input.txt"
+    return send_file(path, as_attachment=True)
+
+@app.route('/download_bench_example')
+def download_bench():
+    path = "./tmp/example.c17.bench.txt"
+    return send_file(path, as_attachment=True)
+
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
