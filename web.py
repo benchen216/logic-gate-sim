@@ -39,6 +39,7 @@ def clear_file():
         os.remove("./tmp/mybench.txt")
     except:
         pass
+    return redirect("/")
 
 @app.route('/download')
 def downloadFile():
@@ -91,7 +92,7 @@ def upload_input():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],
                                    "myinput.txt"))
-            return redirect("/calpage")
+            return redirect("/")
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -111,7 +112,7 @@ def upload_bench():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'],
                                    "mybench.txt"))
-            return redirect("/calpage")
+            return redirect("/")
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -125,4 +126,4 @@ def upload_bench():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')

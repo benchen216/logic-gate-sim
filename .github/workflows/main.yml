@@ -52,3 +52,15 @@ jobs:
       - name: test(python)
         run: |
           make test
+
+      - name: CD
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSHKEY }}
+          PORT: ${{ secrets.PORT }}
+          script: |
+            cd /home/ben/cd_web_api/logic-gate-sim
+            git pull https://github.com/benchen216/logic-gate-sim.git
+
