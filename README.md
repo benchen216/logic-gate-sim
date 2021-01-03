@@ -1,12 +1,11 @@
 # logic gate circuit simulation
 
+A easy software solution to simulate circuits
+
+
 tool c++ and python
 
-
-### c++
-
-bitset, vector
-
+# change log
 
 2020/11/27 error with bitset just use unsigned int instead
 
@@ -14,12 +13,16 @@ bitset, vector
 
 2020/11/28 pytest logic
 
+### c++
+
+bitset, vector
+
 ### python 
-pybind, RE, flask
+pybind, flask
 
 
 
 # todo
 using simd to improve performance
 
-try to do REST API
+# [how to use](https://github.com/benchen216/logic-gate-sim/wiki)  
