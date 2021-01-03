@@ -58,7 +58,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
+          KEY: ${{ secrets.KEY }}
           PORT: ${{ secrets.PORT }}
           script: |
             cd /home/ben/cd_web_api/logic-gate-sim
