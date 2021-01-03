@@ -27,4 +27,4 @@ using simd to improve performance
 
 # [how to use](https://github.com/benchen216/logic-gate-sim/wiki)  
 
-[ketnote file](https://www.icloud.com/keynote/0Irp9c1Brz2csqkmZwhBzDMxQ#nsd_final)
+[presentation ketnote file](https://www.icloud.com/keynote/0Irp9c1Brz2csqkmZwhBzDMxQ#nsd_final)
